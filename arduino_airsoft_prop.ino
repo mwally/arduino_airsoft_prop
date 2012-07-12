@@ -21,7 +21,30 @@ void setup() {
 
 
 void loop() {
-  displayNumber(millis()/10);
+
+  displayTest();
+  delay(1000);
+  displayBlank();
+  delay(1000);
+
+  displaySafe();
+  delay(1000);
+  displayBlank();
+  delay(1000);
+
+  displayFail();
+  delay(1000);
+  displayBlank();
+  delay(1000);
+
+  for(int i = 0; i < 10000; i++) {
+    delay(2);
+    displayNumber(i); 
+  }
+
+  displayBlank();
+  delay(1000);
+
 }
 
 
