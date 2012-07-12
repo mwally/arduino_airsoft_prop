@@ -21,12 +21,7 @@ void setup() {
 
 
 void loop() {
-  displayBlank();
-  displayDigit(0,8);
-  displayDigit(1,9);
-  displayDigit(2,6);
-  displayDigit(3,7);
-  delay(100);
+  displayNumber(millis()/10);
 }
 
 
@@ -54,6 +49,7 @@ void displayTest() {
     } 
   }
 }
+
 
 
 void displaySafe() {
@@ -157,11 +153,11 @@ void displayDigit(int digit, int number) {
 
     case 1:
       digitalWrite(display[digit][0], LOW);
-      digitalWrite(display[digit][1], LOW);
-      digitalWrite(display[digit][2], LOW);
+      digitalWrite(display[digit][1], HIGH);
+      digitalWrite(display[digit][2], HIGH);
       digitalWrite(display[digit][3], LOW);
-      digitalWrite(display[digit][4], HIGH);
-      digitalWrite(display[digit][5], HIGH);
+      digitalWrite(display[digit][4], LOW);
+      digitalWrite(display[digit][5], LOW);
       digitalWrite(display[digit][6], LOW);
       digitalWrite(display[digit][7], LOW);
       break;
@@ -255,5 +251,22 @@ void displayDigit(int digit, int number) {
       break;
 
   }
+
+}
+
+
+
+void displayNumber(int number) {
+ 
+  displayDigit(3, number % 10);
+  number /= 10;
+
+  displayDigit(2, number % 10);
+  number /= 10;
+
+  displayDigit(1, number % 10);
+  number /= 10;
+
+  displayDigit(0, number % 10);
 
 }
