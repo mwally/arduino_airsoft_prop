@@ -1,3 +1,21 @@
+/*
+
+OPERATING INSTRUCTIONS
+----------------------
+
+Step 1:  Turn Safety Switch from "Safe" to "Enabled"
+
+
+
+*/
+
+
+
+// Safety Switch
+
+const int safe = 13;
+
+
 // 4-Digit 8-Segment Display Pins [digit][segment]
 
 const int display[4][8] = { {22, 23, 24, 25, 26, 27, 28, 29},
@@ -9,7 +27,12 @@ const int display[4][8] = { {22, 23, 24, 25, 26, 27, 28, 29},
 
 void setup() {
 
-// 4-Digit 8-Segment Display Outputs
+  // Safety Switch Input
+  
+  pinMode(safe, INPUT);
+  
+  
+  // 4-Digit 8-Segment Display Outputs
 
   for (int digit = 0; digit < 4; digit++) {
     for (int segment = 0; segment < 8; segment++) {
@@ -22,28 +45,37 @@ void setup() {
 
 void loop() {
 
-  displayTest();
-  delay(1000);
-  displayBlank();
-  delay(1000);
+  safeMode();
+  
+}
 
-  displaySafe();
-  delay(1000);
-  displayBlank();
-  delay(1000);
 
-  displayFail();
-  delay(1000);
-  displayBlank();
-  delay(1000);
 
-  for(int i = 0; i < 10000; i++) {
-    delay(2);
-    displayNumber(i); 
-  }
+void safeMode() {
+ 
+ if (digitalRead(safe) == LOW) { timeSet(); }
 
-  displayBlank();
-  delay(1000);
+ displaySafe();
+ delay(1000);
+
+ displayBlank();
+ delay(1000);
+ 
+}
+
+
+
+void timeSet() {
+  
+  
+  
+}
+    
+ 
+    
+void safeModeCheck() {
+
+  if (digitalRead(safe) == HIGH) { safeMode(); }
 
 }
 
@@ -159,7 +191,7 @@ void displayFail() {
 
 
 
-void displayDigit(int digit, int number) {
+void displayDigit(const int digit, const int number) {
 
   switch(number){
 
